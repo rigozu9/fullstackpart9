@@ -9,4 +9,4 @@ const calculateBmi = (height: number, weight: number) => {
         return "Normal " + bmi
 }
 
-console.log(calculateBmi(200, 93))
+console.log(calculateBmi(177, 93))
