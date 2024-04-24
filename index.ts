@@ -1,6 +1,6 @@
 import express from 'express';
 import { calculateBmi } from './bmiCalculator';
-import { isNotNumber } from "./utils"
+import { isNotNumber } from "./utils";
 
 const app = express();
 

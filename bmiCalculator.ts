@@ -1,22 +1,17 @@
-import { isNotNumber } from "./utils"
-
-// const height: number = Number(process.argv[2])
-// const weight: number = Number(process.argv[3])
+import { isNotNumber } from "./utils";
 
 export const calculateBmi = (height: number, weight: number) => {
   if (isNotNumber(height) || isNotNumber(weight)) {
-    throw new Error("Invalid input: height and weight must be numbers")
+    throw new Error("Invalid input: height and weight must be numbers");
   }
-  const heightInMeters = height / 100
-  const bmi = weight / (heightInMeters * heightInMeters)
+  const heightInMeters = height / 100;
+  const bmi = weight / (heightInMeters * heightInMeters);
 
   if (bmi < 18.5) {
-    return "Underweight " + bmi
+    return "Underweight " + bmi;
   } else if (bmi > 24.9) {
-    return "Overweight " + bmi
+    return "Overweight " + bmi;
   } else {
-    return "Normal " + bmi
+    return "Normal " + bmi;
   }
-}
-
-// console.log(calculateBmi(height, weight))
+};
