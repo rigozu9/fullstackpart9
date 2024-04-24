@@ -1,4 +1,4 @@
-import { isNotNumber } from "./utils";
+// import { isNotNumber } from "./utils";
 interface Result {
     periodLength: number
     trainingDays: number
@@ -9,24 +9,24 @@ interface Result {
     average: number
   }
   
-  function parseArguments(args: string[]): { target: number, dailyHours: number[] } {
-    if (args.length < 4) throw new Error('Not enough arguments');
+  // function parseArguments(args: string[]): { target: number, dailyHours: number[] } {
+  //   if (args.length < 4) throw new Error('Not enough arguments');
     
-    const target = Number(args[2]);
-    if (isNotNumber(target)) throw new Error('Invalid target value');
+  //   const target = Number(args[2]);
+  //   if (isNotNumber(target)) throw new Error('Invalid target value');
   
-    const dailyHours = args.slice(3).map(arg => {
-      const hour = Number(arg);
+  //   const dailyHours = args.slice(3).map(arg => {
+  //     const hour = Number(arg);
 
-      if (isNotNumber(hour)) throw new Error('All daily hours must be valid numbers');
-      return hour;
-    });
+  //     if (isNotNumber(hour)) throw new Error('All daily hours must be valid numbers');
+  //     return hour;
+  //   });
   
-    return { target, dailyHours };
-  }
+  //   return { target, dailyHours };
+  // }
   
 
-  function calculateExercises(dailyHours: number[], target: number): Result {
+  export const calculateExercises = (dailyHours: number[], target: number): Result => {
     const periodLength = dailyHours.length;
     const trainingDays = dailyHours.filter(day => day > 0).length;
     const totalHours = dailyHours.reduce((a, b) => a + b, 0);
@@ -53,8 +53,8 @@ interface Result {
       target,
       average,
     };
-  }
+  };
   
-  const { target, dailyHours } = parseArguments(process.argv);
-  const result = calculateExercises(dailyHours, target);
-  console.log(result);
+  // const { target, dailyHours } = parseArguments(process.argv);
+  // const result = calculateExercises(dailyHours, target);
+  // console.log(result);
