@@ -1,3 +1,6 @@
+const height: number = Number(process.argv[2])
+const weight: number = Number(process.argv[3])
+
 const calculateBmi = (height: number, weight: number) => {
     const heightInMeters = height / 100;
     const bmi = weight / (heightInMeters * heightInMeters);
@@ -9,4 +12,4 @@ const calculateBmi = (height: number, weight: number) => {
         return "Normal " + bmi
 }
 
-console.log(calculateBmi(177, 93))
+console.log(calculateBmi(height, weight))
