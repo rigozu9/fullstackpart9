@@ -1,9 +1,9 @@
 import { isNotNumber } from "./utils"
 
-const height: number = Number(process.argv[2])
-const weight: number = Number(process.argv[3])
+// const height: number = Number(process.argv[2])
+// const weight: number = Number(process.argv[3])
 
-const calculateBmi = (height: number, weight: number) => {
+export const calculateBmi = (height: number, weight: number) => {
   if (isNotNumber(height) || isNotNumber(weight)) {
     throw new Error("Invalid input: height and weight must be numbers")
   }
@@ -19,4 +19,4 @@ const calculateBmi = (height: number, weight: number) => {
   }
 }
 
-console.log(calculateBmi(height, weight))
+// console.log(calculateBmi(height, weight))
