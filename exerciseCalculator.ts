@@ -1,3 +1,4 @@
+import { isNotNumber } from "./utils"
 interface Result {
     periodLength: number
     trainingDays: number
@@ -8,19 +9,22 @@ interface Result {
     average: number
   }
   
-  const parseArguments = (args: string[]): Result => {
+  function parseArguments(args: string[]): { target: number, dailyHours: number[] } {
     if (args.length < 4) throw new Error('Not enough arguments')
-    if (args.length > 4) throw new Error('Too many arguments')
+    
+    const target = Number(args[2])
+    if (isNotNumber(target)) throw new Error('Invalid target value')
   
-    if (!isNaN(Number(args[2])) && !isNaN(Number(args[3]))) {
-      return {
-        value1: Number(args[2]),
-        value2: Number(args[3])
-      }
-    } else {
-      throw new Error('Provided values were not numbers!')
-    }
+    const dailyHours = args.slice(3).map(arg => {
+      const hour = Number(arg)
+
+      if (isNotNumber(hour)) throw new Error('All daily hours must be valid numbers')
+      return hour
+    })
+  
+    return { target, dailyHours }
   }
+  
 
   function calculateExercises(dailyHours: number[], target: number): Result {
     const periodLength = dailyHours.length
@@ -51,7 +55,6 @@ interface Result {
     }
   }
   
-  const target = Number(process.argv[2])
-  const dailyHours = process.argv.slice(3).map(arg => Number(arg)) 
+  const { target, dailyHours } = parseArguments(process.argv)
   const result = calculateExercises(dailyHours, target)
   console.log(result)
