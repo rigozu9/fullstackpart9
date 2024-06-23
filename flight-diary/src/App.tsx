@@ -8,6 +8,7 @@ const App = () => {
   const [newWeather, setNewWeather] = useState('');
   const [newVisibility, setNewVisibility] = useState('');
   const [newComment, setNewComment] = useState('');
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     axios.get<DiaryEntry[]>('http://localhost:3000/api/diaries')
@@ -31,9 +32,11 @@ const App = () => {
     axios.post<DiaryEntry>('http://localhost:3000/api/diaries', newDiaryEntry)
       .then(response => {
         setDiaries(diaries.concat(response.data));
+        setError(null);  // Clear error message on successful creation
       })
       .catch(error => {
         console.error('Error creating diary:', error);
+        setError(error.response.data);
       });
 
     setNewDate('');
@@ -45,9 +48,9 @@ const App = () => {
   return (
     <div>
       <form onSubmit={diaryCreation}>
-      <h3>Add a new entry</h3>
+        <h3>Add a new entry</h3>
         <div>
-          <label>date</label>
+          <label>Date</label>
           <input
             type="text"
             value={newDate}
@@ -55,15 +58,7 @@ const App = () => {
           />
         </div>
         <div>
-          <label>visibility</label>
-          <input
-            type="text"
-            value={newVisibility}
-            onChange={(event) => setNewVisibility(event.target.value)}
-          />
-        </div>
-        <div>
-          <label>weather</label>
+          <label>Weather</label>
           <input
             type="text"
             value={newWeather}
@@ -71,7 +66,15 @@ const App = () => {
           />
         </div>
         <div>
-          <label>comment</label>
+          <label>Visibility</label>
+          <input
+            type="text"
+            value={newVisibility}
+            onChange={(event) => setNewVisibility(event.target.value)}
+          />
+        </div>
+        <div>
+          <label>Comment</label>
           <input
             type="text"
             value={newComment}
@@ -80,7 +83,8 @@ const App = () => {
         </div>
         <button type='submit'>Add</button>
       </form>
-      <h3>Diary entires</h3>
+      {error && <p style={{ color: 'red' }}>{error}</p>}
+      <h3>Diary entries</h3>
       <ul>
         {diaries.map(diary =>
           <li key={diary.id}>
