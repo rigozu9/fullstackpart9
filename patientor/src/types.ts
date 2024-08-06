@@ -1,3 +1,5 @@
+// src/types.ts
+
 export interface Diagnosis {
   code: string;
   name: string;
@@ -17,6 +19,16 @@ export interface Patient {
   gender: Gender;
   ssn?: string;
   dateOfBirth?: string;
+  entries: Entry[];
 }
 
 export type PatientFormValues = Omit<Patient, "id" | "entries">;
+
+export interface Entry {
+  id: string;
+  date: string;
+  type: string;
+  specialist: string;
+  description: string;
+  diagnosisCodes?: Array<Diagnosis['code']>;
+}
